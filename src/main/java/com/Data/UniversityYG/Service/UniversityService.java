@@ -12,7 +12,7 @@ import java.util.Optional;
 public class UniversityService {
 
     @Autowired
-    public UniversityRepo universityRepo;
+    private UniversityRepo universityRepo;
 
     // CREATE
     public University addUniversity(University university) {
