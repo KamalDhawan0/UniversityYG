@@ -29,7 +29,7 @@ public class University {
     @NotBlank(message = "Course link is required")
     @Size(max = 500)
     @Pattern(
-            regexp = "^(https?|ftp)://[^\\s/$.?#].[^\\s]*$",
+            regexp = "^(https?://)?([\\w-]+\\.)+[\\w-]+(/[\\w-./?%&=]*)?$",
             message = "Course link must be a valid URL"
     )
     @Column(name = "course_link", nullable = false)

@@ -43,9 +43,10 @@ public class SecurityConfig {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
         config.setAllowedOrigins(List.of(
-                "http://localhost:63342", // WebStorm Live Preview
-                "http://localhost:5500",  // Live Server
-                "http://localhost:3000"   // React
+                "http://localhost:63342",
+                "http://localhost:5500",
+                "http://localhost:3000",
+                "http://127.0.0.1:5500"
         ));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
