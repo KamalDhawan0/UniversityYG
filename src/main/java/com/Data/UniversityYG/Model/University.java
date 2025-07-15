@@ -40,6 +40,9 @@ public class University {
     @Column(name = "course_type", nullable = false)
     private String courseType;
 
+    @ManyToOne
+    @JoinColumn(name = "added_by_user_id")
+    private User addedBy;
 
     public Long getUniversityId() {
         return universityId;
