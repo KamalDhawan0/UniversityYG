@@ -1,6 +1,7 @@
 package com.Data.UniversityYG.Service;
 
 import com.Data.UniversityYG.DTO.LoginRequestDto;
+import com.Data.UniversityYG.DTO.UserIdUsernameView;
 import com.Data.UniversityYG.DTO.UserRegisterRequestDto;
 import com.Data.UniversityYG.Model.User;
 import com.Data.UniversityYG.Repository.UserRepo;
@@ -14,6 +15,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -61,4 +64,7 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 
+    public List<UserIdUsernameView> getallUsers() {
+        return userRepository.findAllIdAndUsername();
+    }
 }

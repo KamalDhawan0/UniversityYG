@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>University Management</title>
+    <!-- Bootstrap CSS for layout and functionality -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Your Custom CSS for theme and appearance -->
+    <link rel="stylesheet" href="university.css" />
+    <!-- Choices.js for searchable dropdowns -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+</head>
+
+<body>
+
+    <header class="header-flex">
+        <div class="header-titles">
+            <h1>COURSE FINDER</h1>
+            <h2>YES Germany</h2>
+        </div>
+        <button id="logoutBtn">Logout</button>
+    </header>
+
+    <main>
+        <div class="main-header">
+            <h2>University Details</h2>
+            <button id="addUniversityBtn">Add University</button>
+        </div>
+
+        <!-- The Modal for Adding/Editing -->
+        <div class="modal fade" id="universityModal" tabindex="-1" aria-labelledby="universityModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="universityModalLabel">Add / Edit University</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="universityForm" novalidate>
+                            <input type="hidden" id="universityId" />
+                            <div class="accordion" id="formAccordion">
+
+                                <!-- Accordion Item 1: Basic Information -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingOne">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                                            aria-expanded="false" aria-controls="collapseOne">
+                                            Basic Information
+                                        </button>
+                                    </h2>
+                                    <div id="collapseOne" class="accordion-collapse collapse"
+                                        aria-labelledby="headingOne" data-bs-parent="#formAccordion">
+                                        <div class="accordion-body">
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+                                                        <label class="text-nowrap" for="universityName">University
+                                                            Name*</label>
+                                                        <select id="universityName" class="w-100"></select>
+                                                    </div>
+                                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+                                                        <label class="text-nowrap" for="courseName">Course Name*</label>
+                                                        <select id="courseName" class="w-100"></select>
+                                                    </div>
+                                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+                                                        <label class="text-nowrap" for="city">City*</label>
+                                                        <select id="city" class="w-100"></select>
+                                                    </div>
+                                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+                                                        <label class="text-nowrap" for="campusLocation">Campus
+                                                            Location*</label>
+                                                        <input type="text" id="campusLocation"
+                                                            class="form-control w-100"
+                                                            placeholder="Enter Campus Location" required />
+                                                    </div>
+                                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+                                                        <label class="text-nowrap" for="programme">Programme*</label>
+                                                        <input type="text" id="programme" class="form-control w-100"
+                                                            placeholder="Enter Programme" required />
+                                                    </div>
+
+                                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+                                                        <label class="text-nowrap" for="courseType">Course Type*</label>
+                                                        <select id="courseType" class="form-select w-100" required>
+                                                            <option value="">Select Course Type</option>
+                                                            <option value="Bachelors">Bachelors</option>
+                                                            <option value="Masters">Masters</option>
+                                                            <option value="PhD">PhD</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+                                                        <label class="text-nowrap" for="moi">Medium of
+                                                            Instruction*</label>
+                                                        <select id="moi" class="form-select w-100" required>
+                                                            <option value="">Select Language</option>
+                                                            <option value="ENGLISH">English</option>
+                                                            <option value="GERMAN">German</option>
+                                                            <option value="BOTH">Both</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+                                                        <label class="text-nowrap" for="campusAddress">Campus
+                                                            Address*</label>
+                                                        <textarea id="campusAddress" class="form-control w-100"
+                                                            placeholder="Enter Full Campus Address" required></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Accordion Item 2: Duration & Deadlines -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                                            aria-expanded="false" aria-controls="collapseTwo">
+                                            Duration & Deadlines
+                                        </button>
+                                    </h2>
+                                    <div id="collapseTwo" class="accordion-collapse collapse"
+                                        aria-labelledby="headingTwo" data-bs-parent="#formAccordion">
+                                        <div class="accordion-body">
+                                            <div class="row g-3">
+                                                <div class="col-12 col-md-6 col-lg-4 col-xl-3"><label
+                                                        for="durationInYears" class="form-label">Duration
+                                                        (Years)</label><input type="number" id="durationInYears"
+                                                        class="form-control" placeholder="e.g., 2" /></div>
+                                                <div class="col-12 col-md-6 col-lg-4 col-xl-3"><label
+                                                        for="applicationStartDate" class="form-label">Application Start
+                                                        Date</label><input type="date" id="applicationStartDate"
+                                                        class="form-control" />
+                                                </div>
+                                                <div class="col-12 col-md-6 col-lg-4 col-xl-3"><label
+                                                        for="firstStepDeadline" class="form-label">First Step
+                                                        Deadline</label><input type="date" id="firstStepDeadline"
+                                                        class="form-control" /></div>
+                                                <div class="col-12 col-md-6 col-lg-4 col-xl-3"><label for="deadLine"
+                                                        class="form-label">Final Deadline</label><input type="date"
+                                                        id="deadLine" class="form-control" /></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Accordion Item 3: Fees -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingThree">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapseThree"
+                                            aria-expanded="false" aria-controls="collapseThree">
+                                            Fees
+                                        </button>
+                                    </h2>
+                                    <div id="collapseThree" class="accordion-collapse collapse"
+                                        aria-labelledby="headingThree" data-bs-parent="#formAccordion">
+                                        <div class="accordion-body">
+                                            <div class="container-fluid">
+                                                <div class="row">
+
+
+                                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3"><label
+                                                            for="applicationFees" class="form-label">Application
+                                                            Fees(EUR)*</label><input type="number" id="applicationFees"
+                                                            class="form-control" placeholder="e.g., 75" min="0"
+                                                            required />
+                                                    </div>
+
+
+                                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+                                                        <label for="tuitionFeePeriod" class="form-label">Tuition Fee
+                                                            Period*</label>
+                                                        <select id="tuitionFeePeriod" class="form-select" required>
+                                                            <option value="">Select Period</option>
+                                                            <option value="Semester">Semester</option>
+                                                            <option value="Course">Course</option>
+                                                            <option value="Year">Year</option>
+                                                            <option value="Trimester">Trimester</option>
+                                                            <option value="Month">Month</option>
+                                                        </select>
+                                                    </div>
+
+
+                                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3"><label
+                                                            for="tuitionFees" class="form-label">Tuition
+                                                            Fees(EUR)*</label><input type="number" id="tuitionFees"
+                                                            class="form-control" placeholder="e.g., 500" min="0"
+                                                            required />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Accordion Item 4: Scores & Requirements -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingFour">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapseFour"
+                                            aria-expanded="false" aria-controls="collapseFour">
+                                            Scores & Requirements
+                                        </button>
+                                    </h2>
+                                    <div id="collapseFour" class="accordion-collapse collapse"
+                                        aria-labelledby="headingFour" data-bs-parent="#formAccordion">
+                                        <div class="accordion-body">
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3"><label
+                                                            for="ieltsScore" class="form-label">IELTS
+                                                            Score</label><input type="number" id="ieltsScore"
+                                                            class="form-control" min="0" max="9" step="0.5"
+                                                            placeholder="e.g., 5" />
+                                                    </div>
+
+                                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3"><label
+                                                            for="toeflScore" class="form-label">TOEFL
+                                                            Score</label><input type="number" id="toeflScore"
+                                                            class="form-control" min="0" max="120" step="1"
+                                                            placeholder="e.g., 100" />
+                                                    </div>
+
+                                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3"><label for="pteScore"
+                                                            class="form-label">PTE Score</label><input type="number"
+                                                            id="pteScore" class="form-control" min="10" max="90"
+                                                            step="1" placeholder="e.g., 50" />
+                                                    </div>
+
+                                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3"><label
+                                                            for="duolingoScore" class="form-label">Duolingo
+                                                            Score</label><input type="number" id="duolingoScore"
+                                                            class="form-control" min="10" max="160" step="1"
+                                                            placeholder="e.g., 100" />
+                                                    </div>
+
+                                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3"><label
+                                                            for="germanProficiencyLevel" class="form-label">German
+                                                            Proficiency</label><select id="germanProficiencyLevel"
+                                                            class="form-select">
+                                                            <option value="">Not Required</option>
+                                                            <option value="A1">A1</option>
+                                                            <option value="A2">A2</option>
+                                                            <option value="B1">B1</option>
+                                                            <option value="B2">B2</option>
+                                                            <option value="C1">C1</option>
+                                                            <option value="C2">C2</option>
+                                                        </select></div>
+                                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3"><label for="greScore"
+                                                            class="form-label">GRE Score</label><input type="number"
+                                                            id="greScore" class="form-control" placeholder="e.g., 320"
+                                                            min="0" />
+                                                    </div>
+                                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3"><label
+                                                            for="gmatScore" class="form-label">GMAT Score</label><input
+                                                            type="number" id="gmatScore" class="form-control"
+                                                            placeholder="e.g., 700" min="0" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Accordion Item 5: Application & Links -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingFive">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapseFive"
+                                            aria-expanded="false" aria-controls="collapseFive">
+                                            Application & Links
+                                        </button>
+                                    </h2>
+                                    <div id="collapseFive" class="accordion-collapse collapse"
+                                        aria-labelledby="headingFive" data-bs-parent="#formAccordion">
+                                        <div class="accordion-body">
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3"><label
+                                                            for="applicationMode" class="form-label">Application
+                                                            Mode*</label><select id="applicationMode"
+                                                            class="form-select" required>
+                                                            <option value="">Select...</option>
+                                                            <option value="Online">Online</option>
+                                                            <option value="Uni-Assist VPD + online">Uni-Assist VPD +
+                                                                online</option>
+                                                            <option value="Online+Post">Online+Post</option>
+                                                            <option value="PDF+Email">PDF+Email</option>
+                                                            <option value="Uni-Assist">Uni-Assist</option>
+                                                            <option value="Precheck+Online">Precheck+Online</option>
+                                                            <option value="PDF+Email+Post">PDF+Email+Post</option>
+                                                            <option value="1 GO">1 GO</option>
+                                                            <option value="Uni-Assist + Online">Uni-Assist + Online
+                                                            </option>
+                                                            <option value="Hochschulstart + Uni-Assist VPD + Online ">
+                                                                Hochschulstart + Uni-Assist VPD + Online </option>
+                                                            <option value="Konstanz-VPD + Online">Konstanz-VPD + Online
+                                                            </option>
+                                                            <option value="Hochschulstart + Uni-Assist">Hochschulstart +
+                                                                Uni-Assist</option>
+                                                            <option value="University-VPD + Online">University-VPD +
+                                                                Online</option>
+
+                                                        </select></div>
+                                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3"><label
+                                                            for="preApplicationTest" class="form-label">Pre-Application
+                                                            Test?</label><select id="preApplicationTest"
+                                                            class="form-select">
+                                                            <option value="No">No</option>
+                                                            <option value="Yes">Yes</option>
+                                                        </select></div>
+                                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+                                                        <label for="courseLink" class="form-label">Course
+                                                            Link*</label><input type="url" id="courseLink"
+                                                            class="form-control" placeholder="https://..." required />
+                                                    </div>
+                                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3"><label
+                                                            for="deadlineLink" class="form-label">Deadline
+                                                            Link*</label><input type="url" id="deadlineLink"
+                                                            class="form-control" placeholder="https://..." required />
+                                                    </div>
+                                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3"><label
+                                                            for="loginLink" class="form-label">Login
+                                                            Link*</label><input type="url" id="loginLink"
+                                                            class="form-control" placeholder="https://..." required />
+                                                    </div>
+                                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3"><label
+                                                            for="postRequirement" class="form-label">Post-Application
+                                                            Requirements</label><textarea id="postRequirement"
+                                                            class="form-control"
+                                                            placeholder="e.g., Send hard copies..."></textarea></div>
+                                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3"><label
+                                                            for="additionalRequirements" class="form-label">Additional
+                                                            Requirements</label><textarea id="additionalRequirements"
+                                                            class="form-control"
+                                                            placeholder="e.g., Letter of Motivation, LORs..."></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <!--Accordian Item 6: Eligibility -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingSix">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapseSix"
+                                            aria-expanded="false" aria-controls="collapseSix">
+                                            Eligibility
+                                        </button>
+                                    </h2>
+                                    <div id="collapseSix" class="accordion-collapse collapse"
+                                        aria-labelledby="headingSix" data-bs-parent="#formAccordion">
+                                        <div class="accordion-body">
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3"><label
+                                                            for="academicLevel" class="form-label">Academic
+                                                            Level*</label><select id="academicLevel" class="form-select"
+                                                            required>
+                                                            <option value="">Select...</option>
+                                                            <option value="10th">10th</option>
+                                                            <option value="12th">12th</option>
+                                                            <option value="Diploma">Diploma</option>
+                                                            <option value="Bachelors">Bachelors</option>
+                                                            <option value="Masters">Masters</option>
+                                                            <option value="PhD">PhD</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3"><label
+                                                            for="specialisation"
+                                                            class="form-label">Specialisation</label><select
+                                                            id="specialisation" class="form-select">
+                                                            <option value="">Select Specialisation...</option>
+                                                            <option value="Accounting">Accounting</option>
+                                                            <option value="Agriculture">Agriculture</option>
+                                                            <option value="Animal Husbandry">Animal Husbandry</option>
+                                                            <option value="Architecture">Architecture</option>
+                                                            <option value="Artificial Intelligence">Artificial
+                                                                Intelligence</option>
+                                                            <option value="Aerospace Engineering">Aerospace Engineering
+                                                            </option>
+                                                            <option value="Automobile Engineering">Automobile
+                                                                Engineering</option>
+                                                            <option value="Biology">Biology</option>
+                                                            <option value="Biomedical Engineering">Biomedical
+                                                                Engineering</option>
+                                                            <option value="Biotechnology">Biotechnology</option>
+                                                            <option value="Business Administration">Business
+                                                                Administration</option>
+                                                            <option value="Chemical Engineering">Chemical Engineering
+                                                            </option>
+                                                            <option value="Chemistry">Chemistry</option>
+                                                            <option value="Civil Engineering">Civil Engineering</option>
+                                                            <option value="Computer Science">Computer Science</option>
+                                                            <option value="Data Science">Data Science</option>
+                                                            <option value="Dentistry">Dentistry</option>
+                                                            <option value="Economics">Economics</option>
+                                                            <option value="Education">Education</option>
+                                                            <option value="Electrical Engineering">Electrical
+                                                                Engineering</option>
+                                                            <option value="Electronics">Electronics</option>
+                                                            <option value="Electronics & Communication Engineering">
+                                                                Electronics & Communication Engineering</option>
+                                                            <option value="English Literature">English Literature
+                                                            </option>
+                                                            <option value="Environmental Science">Environmental Science
+                                                            </option>
+                                                            <option value="Fashion Design">Fashion Design</option>
+                                                            <option value="Finance">Finance</option>
+                                                            <option value="Fine Arts">Fine Arts</option>
+                                                            <option value="Food Science">Food Science</option>
+                                                            <option value="Forensic Science">Forensic Science</option>
+                                                            <option value="Forestry">Forestry</option>
+                                                            <option value="Geography">Geography</option>
+                                                            <option value="Graphic Design">Graphic Design</option>
+                                                            <option value="History">History</option>
+                                                            <option value="Horticulture">Horticulture</option>
+                                                            <option value="Hotel Management">Hotel Management</option>
+                                                            <option value="Human Resource Management">Human Resource
+                                                                Management</option>
+                                                            <option value="Information Technology">Information
+                                                                Technology</option>
+                                                            <option value="Interior Design">Interior Design</option>
+                                                            <option value="Journalism">Journalism</option>
+                                                            <option value="Law">Law</option>
+                                                            <option value="Library Science">Library Science</option>
+                                                            <option value="Linguistics">Linguistics</option>
+                                                            <option value="Mass Communication">Mass Communication
+                                                            </option>
+                                                            <option value="Mathematics">Mathematics</option>
+                                                            <option value="Mechanical Engineering">Mechanical
+                                                                Engineering</option>
+                                                            <option value="Medicine (MBBS)">Medicine (MBBS)</option>
+                                                            <option value="Marketing">Marketing</option>
+                                                            <option value="Nursing">Nursing</option>
+                                                            <option value="Performing Arts">Performing Arts</option>
+                                                            <option value="Petroleum Engineering">Petroleum Engineering
+                                                            </option>
+                                                            <option value="Pharmacy">Pharmacy</option>
+                                                            <option value="Philosophy">Philosophy</option>
+                                                            <option value="Physics">Physics</option>
+                                                            <option value="Physiotherapy">Physiotherapy</option>
+                                                            <option value="Political Science">Political Science</option>
+                                                            <option value="Psychology">Psychology</option>
+                                                            <option value="Public Health">Public Health</option>
+                                                            <option value="Social Work">Social Work</option>
+                                                            <option value="Sociology">Sociology</option>
+                                                            <option value="Statistics">Statistics</option>
+                                                            <option value="Tourism Management">Tourism Management
+                                                            </option>
+                                                            <option value="Veterinary Science">Veterinary Science
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3"><label for="cgpa"
+                                                            class="form-label">CGPA</label><input type="number"
+                                                            id="cgpa" class="form-control" placeholder="e.g., 8" min="0"
+                                                            max="10" step="0.1" />
+                                                    </div>
+                                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3"><label
+                                                            for="percentage" class="form-label">Percentage</label><input
+                                                            type="number" id="percentage" class="form-control"  
+                                                            placeholder="e.g., 80" min="0" max="100" step="1" />
+                                                    </div>
+                                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+                                                        <label for="workExperience" class="form-label">Work Experience
+                                                            (Years)*</label>
+                                                        <input type="number" id="workExperience" class="form-control"
+                                                            placeholder="0 if none" min="0" required /> 
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" id="cancelBtn" class="btn btn-secondary">Cancel</button>
+                                <button type="submit" id="saveBtn" class="btn btn-primary">Save University</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- View-Only Modal for University Data -->
+        <div class="modal fade" id="universityViewModal" tabindex="-1" aria-labelledby="universityViewModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="universityViewModalLabel">University Details (View Only)</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="universityViewContent">
+                            <!-- JS will populate this with university data -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="noUniversityMsg" style="display: none;">No universities found.</div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>University Name</th>
+                    <th>Course</th>
+                    <th>City</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="universityTableBody"></tbody>
+        </table>
+    </main>
+
+    <!--Spinner-->
+    <div id="globalLoader"
+        style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(255,255,255,0.7); z-index:9999; justify-content:center; align-items:center;">
+        <div class="spinner-border text-primary" role="status" style="width:3rem; height:3rem;">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+    <script src="university.js"></script>
+    <script src="config.js"></script>
+</body>
+
+</html>

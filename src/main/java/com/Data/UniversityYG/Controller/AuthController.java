@@ -1,9 +1,7 @@
 package com.Data.UniversityYG.Controller;
 
-import com.Data.UniversityYG.DTO.AuthRequest;
-import com.Data.UniversityYG.DTO.LoginRequestDto;
-import com.Data.UniversityYG.DTO.LoginResponseDto;
-import com.Data.UniversityYG.DTO.UserRegisterRequestDto;
+import com.Data.UniversityYG.DTO.*;
+import com.Data.UniversityYG.Model.User;
 import com.Data.UniversityYG.Service.JwtService;
 import com.Data.UniversityYG.Service.UserService;
 import com.Data.UniversityYG.Service.AuthService;
@@ -11,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 import java.util.Map;
 import java.util.Collections;
 
@@ -32,6 +32,14 @@ public class AuthController {
         this.authenticationManager = authenticationManager;
         this.authService = authService;
     }
+
+
+    @GetMapping("/all")
+    public List<UserIdUsernameView> getaAllUsers(){
+        return userService.getallUsers();
+    }
+
+
 
     @PostMapping("/register")
     public String register(@RequestBody UserRegisterRequestDto dto) {

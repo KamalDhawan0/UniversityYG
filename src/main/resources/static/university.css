@@ -1,0 +1,174 @@
+/* File: university.css */
+:root {
+    --primary-yellow: #fbd105;
+    --dark-gray: #333;
+    --light-gray: #f5f5f5;
+    --white: #fff;
+    --accent-black: #111;
+    --danger-red: #d60000;
+    --border-color: #ccc;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--light-gray);
+    color: var(--dark-gray);
+}
+
+header.header-flex {
+    background-color: var(--white);
+    padding: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 100px;
+}
+
+.header-titles {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+header.header-flex > #logoutBtn {
+    margin-left: auto;
+}
+header h1 {
+    color: var(--primary-yellow);
+    font-size: 40px;
+    font-weight: bold;
+    margin: 0;
+    letter-spacing: 2px;
+}
+
+main {
+    max-width: 1200px;
+    margin: 40px auto;
+    background-color: var(--white);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+}
+
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* --- THEME OVERRIDES FOR BOOTSTRAP --- */
+
+/* Buttons */
+#addUniversityBtn {
+    background-color: var(--primary-yellow);
+    color: var(--accent-black);
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+}
+#saveBtn {
+    background-color: var(--accent-black) !important;
+    color: var(--primary-yellow) !important;
+    border-color: var(--accent-black) !important;
+    font-weight: bold;
+}
+#cancelBtn {
+    background-color: var(--light-gray) !important;
+    color: var(--dark-gray) !important;
+    border-color: var(--border-color) !important;
+    font-weight: bold;
+}
+#logoutBtn {
+    background-color: var(--danger-red);
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Table Header */
+.table > thead {
+    background-color: var(--primary-yellow);
+    color: var(--accent-black);
+}
+
+/* Accordion */
+.accordion-button {
+    font-weight: bold;
+    font-size: 18px;
+}
+.accordion-button:not(.collapsed) {
+    color: var(--accent-black);
+    background-color: #fef9e7; /* A very light yellow for active state */
+    box-shadow: none;
+}
+.accordion-button:focus {
+    box-shadow: none;
+    border-color: rgba(0,0,0,.125);
+}
+
+/* Form Inputs */
+.form-control, .form-select {
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    padding: 10px;
+    height: 48px;
+}
+
+/* Choices.js Customization */
+.choices__inner {
+    border: 1px solid var(--border-color);
+    background-color: white;
+    min-height: 48px;
+    border-radius: 6px;
+}
+
+/* Place textareas in the second row, each spanning two columns for symmetry */
+#postRequirement {
+    grid-column: 1 / span 2;
+}
+#additionalRequirements {
+    grid-column: 3 / span 3;
+}
+
+
+
+/* Make university table rows look clickable on hover */
+#universityTableBody tr {
+    cursor: pointer;
+    transition: background 0.15s;
+}
+#universityTableBody tr:hover {
+    background: #e9f5ff;
+}
+#universityTableBody tr td.actions,
+#universityTableBody tr td.actions button {
+    cursor: default;
+}
+
+
+#universityViewContent .label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 2px;
+}
+#universityViewContent .value {
+    color: #222;
+    word-break: break-word;
+    margin-bottom: 2px;
+}
+
+.custom-label{
+    color:#8a4646;
+    font-size:12px;
+    font-weight:500;
+}
+
